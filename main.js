@@ -15,3 +15,18 @@ bot.onText(/\/help/, function(msg, match) {
   var fromId = msg.from.id;
   bot.sendMessage(fromId, "This spectacular bot just have one single command.\n/insult - Insult you.");
 });
+bot.on('callback_query', function onCallbackQuery(callbackQuery) {
+  const action = callbackQuery.data;
+  const msg = callbackQuery.message;
+  const opts = {
+    chat_id: msg.chat.id,
+    message_id: msg.message_id,
+  };
+  let text;
+
+  if (action === '1') {
+    text = 'You hit button 1';
+  }
+
+  bot.editMessageText(text, opts);
+});
